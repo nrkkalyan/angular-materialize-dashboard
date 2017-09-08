@@ -1,0 +1,70 @@
+<app-progress *ngIf="isRequesting"></app-progress>
+
+<section class="login-page social-login">
+  <div class="login-container boxed-login">
+    <div class="login-box">
+      <div class="login-form-container">
+          <div class="login-form-header">
+            <div class="logo">
+              <span>Login</span>
+            </div>
+          </div>
+
+          <div class='alert alert-warning' *ngIf='Response && Response.error'>
+            {{Response.error.message}}
+          </div>
+
+          <form (submit)="login()">
+            <div class="login-form-content">
+              <div class="unit">
+                <div class="input login-input">
+                  <label class="icon-left" for="login">
+                      <i class="icon icon-person"></i>
+                  </label>
+                  <input [disabled]='isRequesting' (change)="changeInput('username', $event.target.value)" class="form-control login-frm-input" type="text" id="login" name="login" placeholder="Username / Email">
+                </div>
+                <div class='alert alert-warning' *ngIf='findFieldErrorMessage("username")'>
+                  Error: {{findFieldErrorMessage('username')}}
+                </div>
+              </div>
+              <div class="unit">
+                <div class="input login-input">
+                  <label class="icon-left" for="password">
+                      <i class="icon icon-vpn_key"></i>
+                  </label>
+                  <input [disabled]='isRequesting' (change)="changeInput('password', $event.target.value)" class="form-control login-frm-input" type="password" id="password" name="password" placeholder="Password">
+
+                  <div class='alert alert-warning' *ngIf='findFieldErrorMessage("password")'>
+                    Error: {{findFieldErrorMessage('password')}}
+                  </div>
+                  <span class="hint">
+                    <a href="#" class="link">Forgot password?</a>
+                  </span>
+                </div>
+              </div>
+
+              <div class="unit">
+                <label class="checkbox">
+                      <input type="checkbox" (change)="changeInput('remember', $event.target.checked)" name="logged" value="true" checked="">
+                      <i></i>
+                      Keep me logged in
+                  </label>
+              </div>
+
+              <div class="response"></div>
+
+            </div>
+          </form>
+          <div class="login-form-footer" *ngIf="!isRequesting">
+            
+            <div>
+              <a (click)="login()" class="btn-block btn btn-primary  blue darken-1">Sign in</a>
+            </div>
+            <div style="margin-top: 10px;">
+              <a routerLink='/signup' class="btn-block btn   blue lighten-1">Sign up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>

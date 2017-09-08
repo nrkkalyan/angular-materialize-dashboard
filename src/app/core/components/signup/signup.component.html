@@ -1,0 +1,71 @@
+<app-progress *ngIf="isRequesting"></app-progress>
+
+<section class="login-page social-login">
+  <div class="login-container boxed-login">
+    <div class="login-box">
+      <div class="login-form-container"> 
+        <div class="login-form-header" *ngIf="!doneDialog">
+          <div class="logo">
+            <span>Signup</span>
+          </div>
+        </div>
+        <div *ngIf="doneDialog">
+          <div class="alert alert-success">
+            You signed-up successfully. There will be an email send to your inbox
+            to activate your email.
+
+            <br><br>
+            <a class="btn btn-primary" routerLink="/login">
+              <i class="icon icon-user"></i>
+              Login
+            </a> 
+          </div>
+        </div>
+        <form (submit)="signup()" *ngIf="!doneDialog">
+          <div class="login-form-content">
+              
+            <div class="unit">
+                <div class="input login-input">
+                <label class="icon-left" for="login">
+                    <i class="icon icon-person"></i>
+                </label>
+                <input [disabled]="isRequesting" (change)="changeInput('username', $event.target.value)" class="form-control login-frm-input" type="text" id="login" name="login" placeholder="Username / Email">
+              </div>
+              <div class='alert alert-warning' *ngIf='findFieldErrorMessage("username")'>
+                Error: {{findFieldErrorMessage('username')}}
+              </div>
+            </div>
+
+
+            <div class="unit">
+              <div class="input login-input">
+                <label class="icon-left" for="password">
+                    <i class="icon icon-vpn_key"></i>
+                </label>
+                <input [disabled]="isRequesting" (change)="changeInput('password', $event.target.value)" class="form-control login-frm-input" type="password" placeholder="Password">
+
+                <div class='alert alert-warning' *ngIf='findFieldErrorMessage("password")'>
+                  Error: {{findFieldErrorMessage('password')}}
+                </div>
+              </div>
+
+              <span class="hint">
+                <a routerLink='/login' class="link">Or signin now.</a>
+              </span>
+            </div>
+
+            <div class="response"></div>
+
+          </div>
+          <div class="login-form-footer" *ngIf="!isRequesting">
+            <a (click)="signup()" class="btn-block btn btn-primary">Sign up</a>
+          </div>
+        </form>
+        
+    
+      </div>
+ 
+    </div>
+
+  </div>
+</section>
